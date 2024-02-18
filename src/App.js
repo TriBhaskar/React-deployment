@@ -23,7 +23,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: (
-              <Suspense>
+              <Suspense fallback={<p>Loading....</p>}>
                 <BlogPage />
               </Suspense>
             ),
@@ -33,13 +33,14 @@ const router = createBrowserRouter([
           {
             path: ":id",
             element: (
-              <Suspense>
+              <Suspense fallback={<p>Loading....</p>}>
                 <PostPage />
               </Suspense>
             ),
             loader: (meta) =>
-              import("./pages/Post").then((module) => module.loader(meta)), // module.loader(meta) is the same as module.loader({ params: meta.params }) in this case because the loader function only takes one argument
+              import("./pages/Post").then((module) => module.loader(meta)),
           },
+          // module.loader(meta) is the same as module.loader({ params: meta.params }) in this case because the loader function only takes one argument
         ],
       },
     ],
